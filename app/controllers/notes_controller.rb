@@ -9,7 +9,8 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
   def index
-    @notes = Note.all
+		@notes = Note.page(params[:page]).per(10)
+	#	@notes = Note.all
   end
 
   def create
