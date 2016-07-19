@@ -1,8 +1,25 @@
-<h1>新規投稿する</h1>
-<%= form_tag notes_create_path do %>
-  タイトル
-  <input type="text" name="title" class="form-control title-field">
+<h1>新規投稿</h1>
+<%= form_tag notes_create_path(@note.id), method: 'post' do %>
+ 
+<% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= @note.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+        <% @note.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+ タイトル
+  <%= text_field_tag :title, @note.title, class: "form-control title-field" %>
   内容
-  <textarea name="content" class="form-control content-field"></textarea>
-  <input type="submit" value="投稿する" class="btn primary-btn">
+  <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
+  <%= submit_tag "投稿する", class: "btn primary-btn" %>
 <% end %>
+

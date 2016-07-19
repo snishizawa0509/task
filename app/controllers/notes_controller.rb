@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 
 
   def new
-   
+  	@note = Note.new 
   end
 
   def show
@@ -17,8 +17,12 @@ class NotesController < ApplicationController
     @note = Note.new
     @note.title = params[:title]
     @note.content = params[:content]
-    @note.save
-    redirect_to notes_new_path(@note.id)
+		@note.save
+		if @note.save
+    	redirect_to @note, notice: '投稿されました。'
+  	else
+			render :new 
+		end
   end
 
   def edit
@@ -38,8 +42,4 @@ class NotesController < ApplicationController
 		@note.destroy
 		redirect_to notes_path
 	end
-
-
 end
-
-
