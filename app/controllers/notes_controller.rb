@@ -5,6 +5,13 @@ class NotesController < ApplicationController
    
   end
 
+  def show
+    @note = Note.find(params[:id])
+  end
+  def index
+    @notes = Note.all
+  end
+
   def create
     @note = Note.new
     @note.title = params[:title]
