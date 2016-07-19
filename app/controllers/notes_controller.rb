@@ -8,6 +8,7 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
   end
+
   def index
 		@notes = Note.page(params[:page]).per(10)
 	#	@notes = Note.all
@@ -30,11 +31,18 @@ class NotesController < ApplicationController
 	end
 
 	def update
-		@note = Note.find(params[:id])	
+    @note = Note.find(params[:id])	
     @note.title = params[:title]
     @note.content = params[:content]
     @note.save
-    redirect_to note_path(@note.id)
+ 
+		if @note.save
+            redirect_to note_path(@note.id),  notice: '投稿されました。'
+        else
+			render :edit 
+		end
+    
+    
 	end 
 
 	def destroy

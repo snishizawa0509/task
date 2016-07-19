@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Task</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>blogapp</title>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
   </head>
-
   <body>
-    <%= yield %>
+    <header class="navbar">
+    <div class="container">
+    <div id="logo">BLOG</div>
+    <ul class="header-right">
+      <li><%= link_to "トップ", root_path %></li>
+      <li><%= link_to "新規投稿", notes_new_path %></li>
+      <li><%= link_to "投稿一覧", notes_path %></li>
+    </ul>
+    </div>
+    </header>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+        <div class="small">
+          &copy; 2015 Progate, Inc.
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
