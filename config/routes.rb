@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post 'notes/create' => 'notes#create'
   get '/notes' => 'notes#index'
   get '/notes/:id' => 'notes#show', as:'note'
+	patch '/notes/:id' => 'notes#update', as:'note_update'
+  get '/notes/:id/edit' => 'notes#edit'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
