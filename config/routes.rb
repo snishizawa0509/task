@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get '/notes' => 'notes#index'
   get '/notes/:id' => 'notes#show', as:'note'
 	patch '/notes/:id' => 'notes#update', as:'note_update'
-  get '/notes/:id/edit' => 'notes#edit'
+  get '/notes/:id/edit' => 'notes#edit', as:'note_edit'
+	delete '/notes:id' => 'notes#destroy', as:'note_destroy'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
