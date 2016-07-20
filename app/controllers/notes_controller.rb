@@ -18,6 +18,7 @@ class NotesController < ApplicationController
     @note = Note.new
     @note.title = params[:title]
     @note.content = params[:content]
+    @note.category_id = params[:category_id]
 		@note.save
 		if @note.save
     	redirect_to @note, notice: '投稿されました。'
@@ -33,7 +34,8 @@ class NotesController < ApplicationController
 	def update
     @note = Note.find(params[:id])	
     @note.title = params[:title]
-    @note.content = params[:content]
+    @note.content = params[:content] 
+    @note.category_id = params[:category_id]
     @note.save
  
 		if @note.save
