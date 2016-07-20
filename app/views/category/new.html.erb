@@ -4,7 +4,7 @@
         
 　<% if @category.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
-      <h2><%= @category.errors.count %>件のエラーがあります。</h2>                        
+      <h2> エラーがあります。</h2>                        
       <ul>
         <% @category.errors.full_messages.each do |message| %>
           <%= message %>
@@ -12,7 +12,24 @@
       </ul>
     </div>
   <% end %>
-    カテゴリ追加
+
+  カテゴリ追加
     <%= text_field_tag :name, @category.name, class: "form-control title-field" %>
     <%= submit_tag "追加する", class: "btn primary-btn" %>
+<% end %>
+
+
+
+
+<h1>カテゴリ一覧</h1>
+<ul class="categorys">
+  <% @categorys.each do |category| %>
+    <li>
+      <p>カテゴリ名</p>
+      <span class="content">
+        <%= category.name %>
+	<%= link_to "削除", category_destroy_path(category.id), class: "btn edit-btn" %>    
+      </span>
+    </li>
   <% end %>
+</ul>

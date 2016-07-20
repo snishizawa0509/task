@@ -1,7 +1,8 @@
 class CategoryController < ApplicationController
 
   def new
-    @category = Category.new 
+    @categorys = Category.all 
+    @category = Category.new
   end
 
   def create
@@ -11,8 +12,13 @@ class CategoryController < ApplicationController
     if @category.save
       redirect_to @category, notice: '追加しました'
     else
-      render :new
+      redirect_to category_path
     end
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to category_path
+  end
 end
