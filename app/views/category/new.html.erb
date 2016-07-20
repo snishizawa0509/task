@@ -1,0 +1,18 @@
+
+<h1>カテゴリ管理</h1>
+  <%= form_tag category_path, method: 'post' do %>
+        
+　<% if @category.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= @category.errors.count %>件のエラーがあります。</h2>                        
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    カテゴリ追加
+    <%= text_field_tag :name, @category.name, class: "form-control title-field" %>
+    <%= submit_tag "追加する", class: "btn primary-btn" %>
+  <% end %>
