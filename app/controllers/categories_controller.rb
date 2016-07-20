@@ -10,15 +10,15 @@ class CategoriesController < ApplicationController
     @category.name = params[:name]
     @category.save
     if @category.save
-      redirect_to @category, notice: '追加しました'
+      redirect_to new_category_path, notice: '追加しました'
     else
-      redirect_to category_path
+      redirect_to new_category_path
     end
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to category_path
+    redirect_to new_category_path
   end
 end

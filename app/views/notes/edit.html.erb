@@ -1,7 +1,7 @@
 
 
 <h1>編集する</h1>
-<%= form_tag note_update_path(@note.id), method: 'patch' do %>
+<%= form_tag note_path(@note.id), method: 'patch' do %>
 
   <% if @note.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
