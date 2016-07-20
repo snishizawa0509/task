@@ -19,8 +19,8 @@ class NotesController < ApplicationController
     @note.title = params[:title]
     @note.content = params[:content]
     @note.category_id = params[:category_id]
-		@note.save
-		if @note.save
+    
+    if @note.save
     	redirect_to @note, notice: '投稿されました。'
   	else
 			render :new 
@@ -36,7 +36,6 @@ class NotesController < ApplicationController
     @note.title = params[:title]
     @note.content = params[:content] 
     @note.category_id = params[:category_id]
-    @note.save
  
 		if @note.save
             redirect_to note_path(@note.id),  notice: '投稿されました。'
