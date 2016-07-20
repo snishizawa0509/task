@@ -25,9 +25,8 @@
 <ul class="categorys">
   <% @categories.each do |category| %>
     <li>
-      <p>カテゴリ名</p>
+      <p> <%= category.name %> </p>
       <span class="content">
-        <%= category.name %>
 	<%= link_to "削除", category_path(category.id), method: :delete, class: "btn edit-btn" %>    
       </span>
     </li>
