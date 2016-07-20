@@ -20,6 +20,8 @@
   <%= text_field_tag :title, @note.title, class: "form-control title-field" %>
   内容
   <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
+  カテゴリ
+  <%= collection_select @note, :category_id, Category.all, :id, :name  %>
   <%= submit_tag "投稿する", class: "btn primary-btn" %>
 <% end %>
 
