@@ -27,7 +27,8 @@
     <li>
       <p> <%= category.name %> </p>
       <span class="content">
-	<%= link_to "削除", category_path(category.id), method: :delete, class: "btn edit-btn" %>    
+        <%= link_to "編集", edit_category_path(category.id), class: "btn edit-btn" %>
+        <%= link_to "削除", category_path(category.id), method: :delete, class: "btn edit-btn" %>    
       </span>
     </li>
   <% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :categories , only: [:index, :create, :destroy]
+  resources :categories , only: [:edit, :update, :index, :create, :destroy]
   resources :notes
 
   
