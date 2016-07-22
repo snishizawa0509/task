@@ -9,6 +9,8 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new
     @category.name = params[:name]
+    @category.user_id = current_user.id
+    
     if @category.save
       redirect_to categories_path, notice: '追加しました'
     else
