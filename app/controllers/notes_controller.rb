@@ -1,6 +1,4 @@
 class NotesController < ApplicationController
-
-
   def new
   	@note = Note.new 
   end
@@ -10,8 +8,10 @@ class NotesController < ApplicationController
   end
 
   def index
-		@notes = Note.page(params[:page]).per(10)
-	#	@notes = Note.all
+    @notes = Note.page(params[:page]).per(10)
+    @q = Note.search(params[:q])
+    @notes = @q.result(distinct: true)
+    #@notes = Note.all
   end
 
   def create
@@ -35,15 +35,12 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])	
     @note.title = params[:title]
     @note.content = params[:content] 
-    @note.category_id = params[:category_id]
- 
+    @note.category_id = params[:category_id] 
 		if @note.save
-            redirect_to note_path(@note.id),  notice: '投稿されました。'
-        else
+      redirect_to note_path(@note.id),  notice: '投稿されました。'
+    else
 			render :edit 
 		end
-    
-    
 	end 
 
 	def destroy

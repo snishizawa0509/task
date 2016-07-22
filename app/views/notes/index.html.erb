@@ -1,5 +1,13 @@
 <h1>投稿一覧</h1>
-<%= page_entries_info @notes %>
+
+<p>検索フォーム</p>
+  <%= search_form_for @q do |f| %>
+    <%= f.label :title_or_description_cont, "名前 or 説明" %>
+    <%= f.search_field :title_or_content_cont %>
+    <%= f.submit %>
+  <% end %>
+  
+<%#= page_entries_info @notes %>
 <ul class="notes">
   <% @notes.each do |note| %>
     <li>
@@ -12,5 +20,5 @@
       </span>
     </li>
   <% end %>
-<%= paginate @notes %>
+<%#= paginate @notes %>
 </ul>
