@@ -1,0 +1,35 @@
+
+<h1>カテゴリ管理</h1>
+  <%= form_tag categories_path, method: 'post' do %>
+        
+　<% if @category.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2> エラーがあります。</h2>                        
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  カテゴリ追加
+    <%= text_field_tag :name, @category.name, class: "form-control title-field" %>
+    <%= submit_tag "追加する", class: "btn primary-btn" %>
+<% end %>
+
+
+
+
+<h1>カテゴリ一覧</h1>
+<ul class="categorys">
+  <% @categories.each do |category| %>
+    <li>
+      <p> <%= category.name %> </p>
+      <span class="content">
+        <%= link_to "編集", edit_category_path(category.id), class: "btn edit-btn" %>
+        <%= link_to "削除", category_path(category.id), method: :delete, class: "btn edit-btn" %>    
+      </span>
+    </li>
+  <% end %>
+</ul>

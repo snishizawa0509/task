@@ -12,8 +12,9 @@
     <div id="logo">BLOG</div>
     <ul class="header-right">
       <li><%= link_to "トップ", root_path %></li>
-      <li><%= link_to "新規投稿", notes_new_path %></li>
+      <li><%= link_to "新規投稿", new_note_path %></li>
       <li><%= link_to "投稿一覧", notes_path %></li>
+      <li><%= link_to "カテゴリ管理", categories_path %></li>
     </ul>
     </div>
     </header>
@@ -24,9 +25,6 @@
 
     <div class="container">
       <footer class="footer">
-        <div class="small">
-          &copy; 2015 Progate, Inc.
-        </div>
       </footer>
     </div>
   </body>
