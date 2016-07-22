@@ -3,7 +3,7 @@
 <p>検索フォーム</p>
   <%= search_form_for @q do |f| %>
     <%= f.label :title_or_description_cont, "名前 or 説明" %>
-    <%= f.search_field :title_or_content_cont %>
+    <%= f.search_field :title_or_content_or_category_name_cont %>
     <%= f.submit %>
   <% end %>
   
