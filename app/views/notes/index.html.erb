@@ -1,17 +1,10 @@
 <h1>投稿一覧</h1>
 <%= form_tag notes_path, method:'get' do %>
-  <%= text_field_tag :word, nil , class: "form-control title-field" %>
+  <%= text_field_tag :word, @search , class: "form-control title-field" %>
   <%= submit_tag "検索", class: "btn primary-btn" %>
-  <% end %>
+  <% end %> 
   
-
-<%#= form_for @search, do |f| %>
-    <%#= f.label :word, "検索フォーム" %>
-    <%#= f.search_field :word %>
-    <%#= f.submit %>
-<%# end %>
-  
-<%#= page_entries_info @notes %>
+<%= page_entries_info @notes %>
 <ul class="notes">
   <% @notes.each do |note| %>
     <li>
@@ -24,5 +17,5 @@
       </span>
     </li>
   <% end %>
-<%#= paginate @notes %>
+<%= paginate @notes %>
 </ul>
