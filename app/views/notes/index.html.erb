@@ -11,7 +11,9 @@
       <p>タイトル</p>
       <span class="content">
         <%= link_to note.title, note_path(note.id) %>
-        <%= note.category.name  %>
+        <% if note.category != nil %>
+          <%= note.category.name  %>
+        <% end %>  
         <%= note.user.name%>
         <% if current_user != nil && current_user.id == note.user_id  %>
           <%= link_to "編集", edit_note_path(note.id), class: "btn edit-btn" %>     
