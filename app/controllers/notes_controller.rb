@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
   	@note = Note.new 
@@ -20,7 +21,7 @@ class NotesController < ApplicationController
     @note.title = params[:title]
     @note.content = params[:content]
     @note.category_id = params[:category_id]
-    
+    @note.user_id = current_user.id
     if @note.save
     	redirect_to @note, notice: '投稿されました。'
   	else
@@ -49,4 +50,13 @@ class NotesController < ApplicationController
 		@note.destroy
 		redirect_to notes_path
 	end
+
+  private
+    def correct_user
+      note = Note.find(params[:id])
+      if current_user.id != note.user_id
+        redirect_to notes_path
+      end
+    end
+
 end

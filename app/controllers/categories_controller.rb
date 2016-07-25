@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :correct_user, only: [:edit, :update ,:destroy]
   def index
-    @categories = Category.all 
+    @categories = Category.where("user_id = ?",current_user.id) 
     @category = Category.new
   end
 
@@ -20,7 +20,6 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-
   end
 
   def update
@@ -38,4 +37,12 @@ class CategoriesController < ApplicationController
     @category.destroy
     redirect_to categories_path
   end
+   
+  private
+    def correct_user
+      category = Category.find(params[:id])
+      if current_user.id != category.user_id
+        redirect_to categories_path
+      end
+    end
 end

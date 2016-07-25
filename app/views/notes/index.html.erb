@@ -11,9 +11,12 @@
       <p>タイトル</p>
       <span class="content">
         <%= link_to note.title, note_path(note.id) %>
-        <%= note.category_id  %>
-        <%= link_to "編集", edit_note_path(note.id), class: "btn edit-btn" %>     
-	      <%= link_to "削除", note_path(note.id), method:"delete", class: "btn edit-btn" %>    
+        <%= note.category.name  %>
+        <%= note.user.name%>
+        <% if current_user != nil && current_user.id == note.user_id  %>
+          <%= link_to "編集", edit_note_path(note.id), class: "btn edit-btn" %>     
+	        <%= link_to "削除", note_path(note.id), method:"delete", class: "btn edit-btn" %>    
+        <% end %>
       </span>
     </li>
   <% end %>
