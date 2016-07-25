@@ -19,7 +19,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'rails_12factor'
 gem 'kaminari'
-gem "ransack"
+#gem "ransack"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -7,10 +7,12 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
-  def index
-    @notes = Note.page(params[:page]).per(10)
-    @q = Note.search(params[:q])
-    @notes = @q.result(distinct: true)
+  def index 
+    @search = params[:word]
+    @notes = Note.where("title like ? or content like ?",@search,@search).page(params[:page]).per(10)
+    @notes = Note.page(params[:page]).per(10) if @search == nil
+    #@notes = @q.result(distinct: true)
+    #@q = Note.search(params[:q])
     #@notes = Note.all
   end
 
