@@ -20,7 +20,7 @@
   <%= text_field_tag :title, @note.title, class: "form-control title-field" %>
   内容
   <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
-  <%= select_tag :category_id, options_from_collection_for_select(Category.where("user_id = ?",current_user.id), :id, :name) %>
+  <%= select_tag :category_id, options_from_collection_for_select(Category.where(user: current_user), :id, :name) %>
   <%= submit_tag "保存", class: "btn primary-btn" %>
 <% end %>
 

@@ -2,14 +2,14 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update ,:destroy]
   def index
-    @categories = Category.where("user_id = ?",current_user.id) 
+    @categories = Category.where(user: current_user) 
     @category = Category.new
   end
 
   def create
     @category = Category.new
     @category.name = params[:name]
-    @category.user_id = current_user.id
+    @category.user = current_user
     
     if @category.save
       redirect_to categories_path, notice: '追加しました'

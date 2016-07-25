@@ -15,7 +15,7 @@
         <%= note.user.name%>
         <% if current_user != nil && current_user.id == note.user_id  %>
           <%= link_to "編集", edit_note_path(note.id), class: "btn edit-btn" %>     
-	        <%= link_to "削除", note_path(note.id), method:"delete", class: "btn edit-btn" %>    
+          <%= link_to "削除", note_path(note.id), method:"delete", class: "btn edit-btn" %>    
         <% end %>
       </span>
     </li>
