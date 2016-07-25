@@ -1,4 +1,9 @@
 <h1>投稿一覧</h1>
+<%= form_tag notes_path, method:'get' do %>
+  <%= text_field_tag :word, @search , class: "form-control title-field" %>
+  <%= submit_tag "検索", class: "btn primary-btn" %>
+  <% end %> 
+  
 <%= page_entries_info @notes %>
 <ul class="notes">
   <% @notes.each do |note| %>
