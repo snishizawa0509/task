@@ -9,7 +9,7 @@ class NotesController < ApplicationController
 
   def index
     @search = params[:word]
-    @notes = Note.joins(:category).where("title like ? or content like ? or name like ?", @search, @search, @search).page(params[:page]).per(10)
+    @notes = Note.joins(:category).where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{@search}%" , "%#{@search}%", "%#{@search}%" ).page(params[:page]).per(10)
     @notes = Note.page(params[:page]).per(10) if @search == nil
   end
 
