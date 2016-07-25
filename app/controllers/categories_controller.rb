@@ -1,13 +1,16 @@
 class CategoriesController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update ,:destroy]
   def index
-    @categories = Category.all 
+    @categories = Category.where(user: current_user) 
     @category = Category.new
   end
 
   def create
     @category = Category.new
     @category.name = params[:name]
+    @category.user = current_user
+    
     if @category.save
       redirect_to categories_path, notice: '追加しました'
     else
@@ -17,7 +20,6 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-
   end
 
   def update
@@ -35,4 +37,12 @@ class CategoriesController < ApplicationController
     @category.destroy
     redirect_to categories_path
   end
+   
+  private
+    def correct_user
+      category = Category.find(params[:id])
+      if current_user.id != category.user_id
+        redirect_to categories_path
+      end
+    end
 end
