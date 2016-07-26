@@ -29,6 +29,10 @@ class NotesController < ApplicationController
     @note.content = params[:content]
     @note.category_id = params[:category_id]
     @note.user_id = current_user.id
+     
+    file = params[:image]
+    @note.image = params[:image] if file.present?
+    
     if @note.save
     	redirect_to @note, notice: '投稿されました。'
   	else
@@ -45,7 +49,13 @@ class NotesController < ApplicationController
     @note.title = params[:title]
     @note.content = params[:content] 
     @note.category_id = params[:category_id] 
-		if @note.save
+	
+    @check = params[:check]
+    @note.remove_image! if @check == "true"
+    file = params[:image]
+    @note.image = params[:image] if file.present?
+
+    if @note.save
       redirect_to note_path(@note.id),  notice: '投稿されました。'
     else
 			render :edit 
