@@ -1,6 +1,7 @@
 <h1>投稿一覧</h1>
 <%= form_tag notes_path, method:'get' do %>
   <%= text_field_tag :word, @search , class: "form-control title-field" %>
+  <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :name, @search_key), :include_blank => true %>
   <%= submit_tag "検索", class: "btn primary-btn" %>
   <% end %> 
   
