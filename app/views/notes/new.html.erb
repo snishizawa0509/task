@@ -1,5 +1,5 @@
 <h1>新規投稿</h1>
-<%= form_tag notes_path(@note.id), method: 'post' do %> 
+<%= form_tag notes_path(@note.id), method: 'post', :multipart => true do %> 
   <% if @note.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= @note.errors.count %>件のエラーがあります。</h2>
@@ -17,6 +17,16 @@
   <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
   カテゴリ
   <%= select_tag :category_id, options_from_collection_for_select(Category.where("user_id = ?",current_user.id), :id, :name), :prompt => "カテゴリを選択してください" %>
+     <div class="field">
+       <%= label_tag :image %><br>
+       <%= file_field_tag :image %>
+       <%= hidden_field_tag :image_cache %>
+       <% if @note.image? %>
+         <div class="thumbnail">
+           <%= image_tag @note.image.url %>
+         </div>
+       <% end %><br>
+     </div>
   <%= submit_tag "投稿する", class: "btn primary-btn" %>
 <% end %>
 

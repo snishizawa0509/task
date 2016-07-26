@@ -1,6 +1,5 @@
 <h1>編集する</h1>
-<%= form_tag note_path(@note.id), method: 'patch' do %>
-  
+<%= form_tag note_path(@note.id), method: 'patch', multipart: true do %>
   <% if @note.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= @note.errors.count %>件のエラーがあります。</h2>
@@ -17,6 +16,24 @@
   内容
   <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
   <%= select_tag :category_id, options_from_collection_for_select(Category.where(user: current_user), :id, :name, @note.category_id), :prompt => "カテゴリを選択してください" %>
+    <div class="field">
+        <%= label_tag '画像投稿、画像変更' %><br>
+      <%= file_field_tag :image %>
+      <%= hidden_field_tag :image_cache %>
+      <% if @note.image? %>
+        <div class="thumbnail">
+          <%= image_tag @note.image.url %>
+        </div>
+      <% end %><br>
+    </div>
+    <div class="field">
+      <% if @note.persisted? && @note.image? %>
+        <label>
+          <%= check_box_tag :check, true, false, {} %>
+          画像を削除
+        </label>
+      <% end %>
+    </div>
   <%= submit_tag "保存", class: "btn primary-btn" %>
 <% end %>
 
