@@ -9,11 +9,18 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
   end
-
+ 
   def index
-    @search = params[:word]
-    @notes = Note.joins(:category).where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{@search}%" , "%#{@search}%", "%#{@search}%" ).page(params[:page]).per(10)
-    @notes = Note.page(params[:page]).per(10) if @search == nil
+    @search_word = params[:word]
+    @notes = Note.joins(:category) 
+    if @search_word.present?
+        for word in @search_word.split(/ |　/)
+        @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%")
+      end
+    end
+    @user_key = params[:user_id]
+    @notes = @notes.where("notes.user_id = ?", @user_key) if @user_key.present?
+    @notes = @notes.page(params[:page]).per(10)
   end
 
   def create
@@ -26,12 +33,12 @@ class NotesController < ApplicationController
     	redirect_to @note, notice: '投稿されました。'
   	else
 			render :new 
-		end
+    end
   end
 
   def edit
 		@note = Note.find(params[:id])
-	end
+  end
 
 	def update
     @note = Note.find(params[:id])	
