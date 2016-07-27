@@ -15,9 +15,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
-# Ignore upload_files 
-/public/uploads/tmp/*
-!/public/uploads/tmp/.keep
-/public/uploads/note/image/*
-!/public/uploads/note/image/.keep
