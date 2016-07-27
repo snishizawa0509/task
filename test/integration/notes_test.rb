@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NoteTest < ActionDispatch::IntegrationTest
+class NotesTest < ActionDispatch::IntegrationTest
   test "Create a new post" do
     login_as(users(:user1))
     visit notes_path
