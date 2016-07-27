@@ -1,11 +1,8 @@
-
 <h1>編集する</h1>
-<%= form_tag category_path(@category.id), method: 'patch' do %>
-
+<%= form_for @category do |f|%>
   <% if @category.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= @category.errors.count %>件のエラーがあります。</h2>
-
       <ul>
         <% @category.errors.full_messages.each do |message| %>
           <%= message %>
@@ -13,9 +10,7 @@
       </ul>
     </div>
   <% end %>
-    
-    
-    タイトル
-  <%= text_field_tag :name, @category.name, class: "form-control title-field" %>
-  <%= submit_tag "保存", class: "btn primary-btn" %>
+  タイトル
+  <%= f.text_field :name, class: "form-control title-field" %>
+  <%= f.submit "保存", class: "btn primary-btn" %>
 <% end %>

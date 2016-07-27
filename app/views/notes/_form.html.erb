@@ -1,0 +1,29 @@
+<%= form_for @note, html: { multipart: true } do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= @note.errors.count %>件のエラーがあります。</h2>
+      <ul>
+        <% @note.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    
+  タイトル
+  <%= f.text_field :title, class: "form-control title-field" %>
+  内容
+  <%= f.text_area :content, class: "form-control content-field" %>
+  <%= f.select :category_id, Category.where(user: current_user).map{|t| [t.name, t.id]}, prompt: "カテゴリを選択してください" %>
+  <label>image</label>
+  <%= image_tag(@note.image_url) if @note.image? %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
+  <% if @note.persisted? && @note.image? %>
+    <label>
+      <%= f.check_box :remove_image %>
+      画像を削除
+    </label>
+  <% end %>
+  <%= f.submit "保存", class: "btn primary-btn" %>
+<% end %>

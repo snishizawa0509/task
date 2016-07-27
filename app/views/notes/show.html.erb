@@ -12,6 +12,15 @@
 <h2>記事内容</h2>
 <p><%= @note.content %></p>
 
+ <p>
+ <h2>image</h2>
+ <% if @note.image? %>
+   <div class="thumbnail">
+     <%= image_tag @note.image.url %>
+   </div>
+<% end %>
+</p>
+
 <% if current_user.id == @note.user_id  %>
   <%= link_to "編集", edit_note_path(@note.id), class: "btn edit-btn" %>
   <%= link_to "削除", note_path(@note.id), method:"delete", class: "btn edit-btn" %> 

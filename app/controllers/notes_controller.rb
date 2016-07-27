@@ -1,20 +1,20 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def new
   	@note = Note.new 
   end
 
   def show
-    @note = Note.find(params[:id])
   end
  
   def index
     @search_word = params[:word]
     @notes = Note.joins(:category) 
     if @search_word.present?
-        for word in @search_word.split(/ |　/)
+      for word in @search_word.split(/ |　/)
         @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%")
       end
     end
@@ -24,11 +24,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new
-    @note.title = params[:title]
-    @note.content = params[:content]
-    @note.category_id = params[:category_id]
-    @note.user_id = current_user.id
+    @note = current_user.notes.build(note_params)
     if @note.save
     	redirect_to @note, notice: '投稿されました。'
   	else
@@ -37,28 +33,30 @@ class NotesController < ApplicationController
   end
 
   def edit
-		@note = Note.find(params[:id])
   end
 
 	def update
-    @note = Note.find(params[:id])	
-    @note.title = params[:title]
-    @note.content = params[:content] 
-    @note.category_id = params[:category_id] 
-		if @note.save
+    if @note.update(note_params)
       redirect_to note_path(@note.id),  notice: '投稿されました。'
     else
 			render :edit 
-		end
+    end
 	end 
 
 	def destroy
-	  @note = Note.find(params[:id])
 		@note.destroy
 		redirect_to notes_path
 	end
 
   private
+    def set_note
+        @note = Note.find(params[:id])
+    end
+
+    def note_params
+        params.require(:note).permit(:title, :content, :category_id, :image, :image_cache, :remove_image )
+    end
+
     def correct_user
       note = Note.find(params[:id])
       if current_user.id != note.user_id

@@ -1,5 +1,5 @@
 <h1>カテゴリ管理</h1>
-  <%= form_tag categories_path, method: 'post' do %>
+  <%= form_for @category do |f| %>
   　<% if @category.errors.any? %>
       <div id="error_explanation" class="alert alert-danger">
         <h2> エラーがあります。</h2>                        
@@ -11,8 +11,8 @@
       </div>
     <% end %>
     カテゴリ追加
-    <%= text_field_tag :name, @category.name, class: "form-control title-field" %>
-    <%= submit_tag "追加する", class: "btn primary-btn" %>
+    <%= f.text_field :name, class: "form-control title-field" %>
+    <%= f.submit "追加する", class: "btn primary-btn" %>
   <% end %>
 
 <h1>カテゴリ一覧</h1>
