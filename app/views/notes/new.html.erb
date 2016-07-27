@@ -16,7 +16,7 @@
   内容
   <%= text_area_tag :content, @note.content, class: "form-control content-field" %>
   カテゴリ
-  <%= select_tag :category_id, options_from_collection_for_select(Category.where("user_id = ?",current_user.id), :id, :name) %>
+  <%= select_tag :category_id, options_from_collection_for_select(Category.where("user_id = ?",current_user.id), :id, :name), :prompt => "カテゴリを選択してください" %>
   <%= submit_tag "投稿する", class: "btn primary-btn" %>
 <% end %>
 
