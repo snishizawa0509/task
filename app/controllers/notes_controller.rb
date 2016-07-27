@@ -11,17 +11,15 @@ class NotesController < ApplicationController
   end
  
   def index
-    @search = params[:word]
-    if @search.present?
-      for word in @search.split(/ |　/)
-        @notes = Note.joins(:category).where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%") if word.present? && @notes == nil
-        @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%") if word.present? && @notes != nil
+    @search_word = params[:word]
+    @notes = Note.joins(:category) 
+    if @search_word.present?
+        for word in @search_word.split(/ |　/)
+        @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%")
       end
     end
-    @search_key = params[:user_id]
-    @notes = @notes.where("notes.user_id = ?", @search_key) if @search.present? && @search_key.present?
-    @notes = Note  if @search.blank? && @search_key.blank?
-    @notes = Note.where( user_id: @search_key) if @search.blank? && @search_key.present?
+    @user_key = params[:user_id]
+    @notes = @notes.where("notes.user_id = ?", @user_key) if @user_key.present?
     @notes = @notes.page(params[:page]).per(10)
   end
 
