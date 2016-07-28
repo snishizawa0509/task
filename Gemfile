@@ -20,7 +20,8 @@ gem 'devise'
 gem 'rails_12factor'
 gem 'kaminari'
 gem 'carrierwave'
-
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
