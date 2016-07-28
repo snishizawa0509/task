@@ -24,7 +24,7 @@
     <% @notes.each do |note| %>
       <tr>
         <td><%= link_to note.title, note_path(note) %></td>
-        <td><%= note.content %></td>
+        <td><%= note.content.truncate(8, omission: '~~~') %></td>
         <td><%= note.category.name %></td>
         <td><%= note.user.name %></td>
         <td><%= note.image %></td>
