@@ -13,8 +13,10 @@
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @note.user.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= @note.image %></dd>
-  <dt><strong> <%= image_tag @note.image.url %></strong></dt>
+  <% if @note.image? %>
+    <dd><%= @note.image %></dd>
+    <dt><strong> <%= image_tag @note.image.url %></strong></dt> 
+  <% end %>
 </dl>
 
 <% if current_user.id == @note.user_id  %>
