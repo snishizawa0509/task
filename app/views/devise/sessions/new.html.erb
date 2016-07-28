@@ -1,5 +1,6 @@
-<h2>ログイン</h2>
-
+<div class="page-header">
+  <h1>Sing in</h1>
+</div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     
   <div class="field">
@@ -20,7 +21,7 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "ログイン" %>
+    <%= f.submit "Sing in" %>
   </div>
 <% end %>
 
