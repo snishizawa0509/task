@@ -2,17 +2,19 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<%= form_tag notes_path, method:'get' do %>
-  <%= text_field_tag :word, @search_word , class: "form-control title-field" %>
-  <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :name, @user_key), :include_blank => true %>
-  <%= submit_tag "検索", class: "btn primary-btn" %>
-<% end %> 
+
+  <%= form_tag notes_path, method:'get', class: "form-inline" do %>
+    <%= text_field_tag :word, @search_word , class: "form-control" %>
+    <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :name, @user_key), :include_blank => true, class: "form-control" %>
+      <%= submit_tag "検索", class: "btn primary-btn" %>
+    <% end %> 
+
 <table class="table table-striped">
 <%= page_entries_info @notes %>
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
+      <th class="col-md-2"><%= model_class.human_attribute_name(:title) %></th>
+      <th class="col-md-2"><%= model_class.human_attribute_name(:content) %></th>
       <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:image) %></th>
@@ -24,10 +26,16 @@
     <% @notes.each do |note| %>
       <tr>
         <td><%= link_to note.title, note_path(note) %></td>
-        <td><%= note.content.truncate(8, omission: '~~~') %></td>
+        <td><%= note.content.truncate(15, omission: '・・・') %></td>
         <td><%= note.category.name %></td>
         <td><%= note.user.name %></td>
-        <td><%= note.image %></td>
+        <td>
+          <% if note.image.present? %>
+            <%= 'Have' %>
+          <% else %>
+            <%= 'Noting'%>
+          <% end %>
+        </td>
         <td><%=l note.created_at %></td>  
         <td>
         <% if current_user != nil && current_user.id == note.user_id  %>

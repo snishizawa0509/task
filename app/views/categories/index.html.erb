@@ -17,12 +17,12 @@
       </div>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.label "カテゴリ追加", :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
-      <%= f.submit "追加する", class: "btn primary-btn" %>
-    </div>
+  <%= f.label "カテゴリ追加", :class => 'control-label' %>
+  <div class="input-group">
+    <%= f.text_field :name, :class => 'form-control' %>
+    <span class="input-group-btn">
+      <%= f.submit "追加する", class: "btn btn-default" %>
+    </span>
     <%=f.error_span(:name) %>
   </div>
 <% end %>
@@ -30,6 +30,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
