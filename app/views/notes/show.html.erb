@@ -1,27 +1,27 @@
-
-<p id=notice>
-<%= notice  %>
-</p>
-
-<h2>タイトル</h2>
-<p><%= @note.title %></p>
-<h2>カテゴリ</h2>
-<% if @note.category != nil %>
-  <p><%= @note.category.name %></p>
-<% end %>
-<h2>記事内容</h2>
-<p><%= @note.content %></p>
-
- <p>
- <h2>image</h2>
- <% if @note.image? %>
-   <div class="thumbnail">
-     <%= image_tag @note.image.url %>
-   </div>
-<% end %>
-</p>
-
-<% if current_user.id == @note.user_id  %>
-  <%= link_to "編集", edit_note_path(@note.id), class: "btn edit-btn" %>
-  <%= link_to "削除", note_path(@note.id), method:"delete", class: "btn edit-btn" %> 
-<% end %>
+<div class="row">
+  <div class="col-sm-11 blog-main">
+    <div class="blog-post">
+      <h2 class="blog-post-title"><%= @note.title %></h2>
+      <p class="blog-post-meta">
+        <%= @note.updated_at %>
+        by<a><%= @note.user.name%></a><br>
+        Category:<%= @note.category.name%> 
+      </p>
+      <p><%= @note.content %></p>
+    </div><!-- /.blog-post -->
+    <% if @note.image? %>
+      <%= @note.image %><br>
+      <%= image_tag @note.image.url %> 
+    <% end %><br>
+    <% if current_user != nil && current_user.id == @note.user_id %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+        edit_note_path(@note), :class => 'btn btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        note_path(@note),
+        :method => 'delete',
+        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+        :class => 'btn btn-danger' %>
+     <% end %>
+     <%= link_to t('.back', :default => t("helpers.links.back")),notes_path, :class => 'btn btn-default'  %>
+  </div><!-- /.blog-main -->
+</div>

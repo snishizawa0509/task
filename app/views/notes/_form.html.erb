@@ -1,29 +1,60 @@
-<%= form_for @note, html: { multipart: true } do |f| %>
+<%= form_for @note, html: { class: "form-horizontal note", multipart: true } do |f| %>
+
   <% if @note.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= @note.errors.count %>件のエラーがあります。</h2>
-      <ul>
-        <% @note.errors.full_messages.each do |message| %>
-          <%= message %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@note.errors.count, "") %> 件のエラーがあります。</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
-      </ul>
+        </ul>
+      </div>
     </div>
   <% end %>
-    
-  タイトル
-  <%= f.text_field :title, class: "form-control title-field" %>
-  内容
-  <%= f.text_area :content, class: "form-control content-field" %>
-  <%= f.select :category_id, Category.where(user: current_user).map{|t| [t.name, t.id]}, prompt: "カテゴリを選択してください" %>
-  <label>image</label>
-  <%= image_tag(@note.image_url) if @note.image? %>
-  <%= f.file_field :image %>
-  <%= f.hidden_field :image_cache %>
-  <% if @note.persisted? && @note.image? %>
-    <label>
-      <%= f.check_box :remove_image %>
-      画像を削除
-    </label>
-  <% end %>
-  <%= f.submit "保存", class: "btn primary-btn" %>
+
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+    <%= f.text_area :content, class: "form-control" %>
+    </div>
+    <%=f.error_span(:content) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+    <%= f.select :category_id, Category.where(user: current_user).map{|t| [t.name, t.id]}, prompt: "カテゴリを選択してください", :class => 'form-control'%>
+    </div>
+    <%=f.error_span(:category_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= image_tag(@note.image_url) if @note.image? %>
+      <%= f.file_field :image, :class => 'form-control' %>
+      <%= f.hidden_field :image_cache %>
+      <% if @note.persisted? && @note.image? %>
+        <%= f.check_box :remove_image %>
+      <% end %>
+    </div>
+    <%=f.error_span(:image) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                notes_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
 <% end %>

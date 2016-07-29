@@ -9,7 +9,7 @@ class NotesTest < ActionDispatch::IntegrationTest
     fill_in('note[content]', with: 'こんにちわ')
     select('テスト1', :from => 'note[category_id]')
     assert_difference 'Note.count', 1, '投稿が作成されるべき' do
-      click_button '保存'
+      click_button '登録する'
     end
 
     assert page.has_content?('投稿されました')
