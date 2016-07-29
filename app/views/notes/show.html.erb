@@ -1,26 +1,18 @@
-<div class="blog-header">
-  <h1 class="blog-title">The Bootstrap Blog</h1>
-  <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-</div>
-
 <div class="row">
   <div class="col-sm-11 blog-main">
     <div class="blog-post">
       <h2 class="blog-post-title"><%= @note.title %></h2>
       <p class="blog-post-meta">
-      <%= @note.updated_at %>
-       by<a><%= @note.user.name%></a><br>
-       Category:<%= @note.category.name%>
-        
+        <%= @note.updated_at %>
+        by<a><%= @note.user.name%></a><br>
+        Category:<%= @note.category.name%> 
       </p>
       <p><%= @note.content %></p>
     </div><!-- /.blog-post -->
-    <%= notice  %>
     <% if @note.image? %>
-      <%= @note.image %>
+      <%= @note.image %><br>
       <%= image_tag @note.image.url %> 
-    <% end %>
-
+    <% end %><br>
     <% if current_user != nil && current_user.id == @note.user_id %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
         edit_note_path(@note), :class => 'btn btn-default' %>

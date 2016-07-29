@@ -36,7 +36,7 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.name %></td>
+        <td class="col-md-7"><%= category.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),edit_category_path(category), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),category_path(category), :method => :delete,
