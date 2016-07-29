@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      category: カテゴリ  #g
+      note: 投稿  #g
+      user: ユーザー  #g
+
+    attributes:
+      category:
+        name: カテゴリ名  #g
+        notes: ノート  #g
+        user: :activerecord.models.user  #g
+
+      note:
+        category: カテゴリ  #g
+        content: コンテンツ  #g
+        image: 画像  #g
+        title: タイトル  #g
+        user: :activerecord.models.user  #g
+
+      user:
+        categories: カテゴリ  #g
+        email: Eメール  #g
+        encrypted_password: パスワード  #g
+        name: アカウント名  #g
+        notes: 投稿  #g
+        reset_password_sent_at: で送信されたパスワードをリセット  #g
+        reset_password_token: パスワードトークンをリセット  #g
