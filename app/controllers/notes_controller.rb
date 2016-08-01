@@ -4,15 +4,15 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def new
-  	@note = Note.new 
+  	@note = Note.new
   end
 
   def show
   end
- 
+
   def index
     @search_word = params[:word]
-    @notes = Note.joins(:category) 
+    @notes = Note.joins(:category)
     if @search_word.present?
       for word in @search_word.split(/ |　/)
         @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%")
@@ -28,7 +28,7 @@ class NotesController < ApplicationController
     if @note.save
     	redirect_to @note, notice: '投稿されました。'
   	else
-			render :new 
+			render :new
     end
   end
 
@@ -39,9 +39,9 @@ class NotesController < ApplicationController
     if @note.update(note_params)
       redirect_to note_path(@note.id),  notice: '投稿されました。'
     else
-			render :edit 
+			render :edit
     end
-	end 
+	end
 
 	def destroy
 		@note.destroy
