@@ -156,11 +156,14 @@ ja:
         one: "%{model}にエラーが発生しました"
         other: "%{model}に%{count}個のエラーが発生しました"
   helpers:
+    links:
+      edit: '編集'
+      destroy: '削除'
     page_entries_info:
       one_page:
         display_entries:
-          zero: "%{entry_name} が存在しません"
-          one:  "%{entry_name}  <b>all %{count}</b>　1ページ目のみ"
+          zero: "0件"
+          one:  " <b> %{count}件</b>　1ページ目のみ"
           other: "全体で <b> %{count}</b> 件"
       more_pages:
         display_entries: "  <b>%{first}&nbsp;-&nbsp;%{last}</b> までを表示中　全体で <b>%{total}</b> 件"

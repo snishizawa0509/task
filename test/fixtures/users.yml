@@ -1,5 +1,13 @@
 <% require 'bcrypt'%>
 user1:
-  name: 西澤駿平
-  email: s-nishizawa@towatech.net
+  name: nishizawa
+  email: 1-nishizawa@towatech.net
+  encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>
+user2:
+  name: takashi
+  email: 2-nishizawa@towatech.net
+  encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>
+user3:
+  name: taguchi
+  email: 3-nishizawa@towatech.net
   encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>

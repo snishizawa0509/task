@@ -1,11 +1,17 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-#one: {}
-# column: value
-#
-#two: {}
-# column: value
+<% 5.times do |i| %>
+note1<%= i %>:
+  title: <%= "動物#{i}" %>
+  content: cattle
+  category: category_1<%= i %>
+  user: user1
+note2<%= i %>:
+  title: <%= "動物#{i}" %>
+  content: cat
+  category: category_2<%= i %>
+  user: user2
+note3<%= i %>:
+  title: <%= "動物#{i}" %>
+  content: dog
+  category: category_3<%= i %>
+  user: user3
+<% end %>
