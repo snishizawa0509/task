@@ -4,15 +4,11 @@ note1<%= i %>:
   content: cattle
   category: category_1<%= i %>
   user: user1
-<% end %>
-<% 5.times do |i| %>
 note2<%= i %>:
   title: <%= "動物#{i}" %>
   content: cat
   category: category_2<%= i %>
   user: user2
-<% end %>
-<% 5.times do |i| %>
 note3<%= i %>:
   title: <%= "動物#{i}" %>
   content: dog

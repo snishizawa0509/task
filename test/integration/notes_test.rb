@@ -22,7 +22,6 @@ class NotesTest < ActionDispatch::IntegrationTest
   test "Edit post" do
     login_as(users(:user1))
     visit notes_path
-    puts page.body
     first(:link, '編集').click
     fill_in('note[title]', with: '記事')
     fill_in('note[content]', with: 'こんにちわ')
@@ -40,7 +39,7 @@ class NotesTest < ActionDispatch::IntegrationTest
     login_as(users(:user1))
     visit notes_path
     assert_difference 'Note.count', -1 do
-      first(:link, '削除').click 
+      first(:link, '削除').click
     end
   end
 

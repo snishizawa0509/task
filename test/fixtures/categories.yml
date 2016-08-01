@@ -2,13 +2,9 @@
 category_1<%= i %>:
   name: <%= "牛#{i}" %>
   user: user1
-<% end %>
-<% 5.times do |i| %>
 category_2<%= i %>:
   name: <%= "猫#{i}" %>
   user: user2
-<% end %>
-<% 5.times do |i| %>
 category_3<%= i %>:
   name: <%= "犬#{i}" %>
   user: user3

@@ -16,7 +16,6 @@ class CategoriesTest < ActionDispatch::IntegrationTest
   test "Edit category" do
     login_as(users(:user1))
     visit categories_path
-    puts page.body
     first(:link, '編集').click
     fill_in('category[name]', with: 'テストカテゴリ')
     click_button '更新する'
@@ -29,7 +28,6 @@ class CategoriesTest < ActionDispatch::IntegrationTest
   test "Delete category" do
     login_as(users(:user1))
     visit categories_path
-    puts page.body
     assert_difference 'Category.count', -1 do
       first(:link, '削除').click
     end
