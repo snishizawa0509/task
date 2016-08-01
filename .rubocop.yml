@@ -1,0 +1,20 @@
+AllCops:
+  UseCache: false
+  DisplayCopNames: true
+  Exclude:
+    - !ruby/regexp /\/db\/schema\.rb$/
+    - !ruby/regexp /\/vendor\/.*/
+    - !ruby/regexp /\/bin\/.*/
+  TargetRubyVersion: 2.3
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
