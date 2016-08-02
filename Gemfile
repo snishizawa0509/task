@@ -21,6 +21,7 @@ gem 'rails_12factor'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'i18n_generators'
+gem 'rmagick'
 
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
