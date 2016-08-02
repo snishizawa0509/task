@@ -10,10 +10,11 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.build(category_params)
     if @category.save
-      redirect_to categories_path, notice: '追加しました'
+      flash[:notice] = '追加しました'
     else
-      redirect_to categories_path
+      flash[:error] = 'カテゴリ名を記入してください。'
     end
+    redirect_to categories_path
   end
 
   def edit
@@ -28,7 +29,11 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
+    if @category.destroy
+      flash[:notice] = '追加しました'
+    else
+      flash[:error] = 'ノートが存在しているため削除できません。'
+    end
     redirect_to categories_path
   end
 
