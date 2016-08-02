@@ -3,7 +3,7 @@
   <% if @note.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@note.errors.count, "") %> 件のエラーがあります。</h3>
+        <h3 class="panel-title"><%= @note.errors.count %> 件のエラーがあります。</h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -20,33 +20,32 @@
     <div class="col-lg-10">
       <%= f.text_field :title, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:title) %>
   </div>
+
   <div class="form-group">
     <%= f.label :content, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
     <%= f.text_area :content, class: "form-control" %>
     </div>
-    <%=f.error_span(:content) %>
   </div>
+
   <div class="form-group">
     <%= f.label :category, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
     <%= f.select :category_id, Category.where(user: current_user).map{|t| [t.name, t.id]}, prompt: "カテゴリを選択してください", :class => 'form-control'%>
     </div>
-    <%=f.error_span(:category_id) %>
   </div>
+
   <div class="form-group">
     <%= f.label :image, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= image_tag(@note.image_url) if @note.image? %>
-      <%= f.file_field :image, :class => 'form-control' %>
-      <%= f.hidden_field :image_cache %>
       <% if @note.persisted? && @note.image? %>
         <%= f.check_box :remove_image %>
       <% end %>
+      <%= image_tag(@note.image_url) if @note.image? %>
+      <%= f.file_field :image, :class => 'form-control' %>
+      <%= f.hidden_field :image_cache %>
     </div>
-    <%=f.error_span(:image) %>
   </div>
 
   <div class="form-group">
