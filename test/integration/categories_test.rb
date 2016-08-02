@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CategoriesTest < ActionDispatch::IntegrationTest
-  test "Create a new category" do
+  test 'Create a new category' do
     login_as(users(:user1))
     visit categories_path
     fill_in('category[name]', with: 'テストカテゴリ')
@@ -13,7 +13,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 'テストカテゴリ', category.name
   end
 
-  test "Edit category" do
+  test 'Edit category' do
     login_as(users(:user1))
     visit categories_path
     first(:link, '編集').click
@@ -25,7 +25,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 'テストカテゴリ', category.name
   end
 
-  test "Delete category" do
+  test 'Delete category' do
     login_as(users(:user1))
     visit categories_path
     assert_difference 'Category.count', -1 do
