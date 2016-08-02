@@ -5,7 +5,13 @@ AllCops:
     - !ruby/regexp /\/db\/schema\.rb$/
     - !ruby/regexp /\/vendor\/.*/
     - !ruby/regexp /\/bin\/.*/
+    - db/migrate/*
+    - config/puma.rb
   TargetRubyVersion: 2.3
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 20
 
 Metrics/LineLength:
   Enabled: false

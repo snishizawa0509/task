@@ -4,7 +4,7 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def new
-  	@note = Note.new
+    @note = Note.new
   end
 
   def show
@@ -14,54 +14,52 @@ class NotesController < ApplicationController
     @search_word = params[:word]
     @notes = Note.joins(:category)
     if @search_word.present?
-      for word in @search_word.split(/ |　/)
-        @notes = @notes.where("notes.title like ? or notes.content like ? or categories.name like ?", "%#{word}%" , "%#{word}%", "%#{word}%")
+      @search_word.split(/ |　/).each do |word|
+        @notes = @notes.where('notes.title like ? or notes.content like ? or categories.name like ?', "%#{word}%", "%#{word}%", "%#{word}%")
       end
     end
     @user_key = params[:user_id]
-    @notes = @notes.where("notes.user_id = ?", @user_key) if @user_key.present?
+    @notes = @notes.where('notes.user_id = ?', @user_key) if @user_key.present?
     @notes = @notes.page(params[:page]).per(10)
   end
 
   def create
     @note = current_user.notes.build(note_params)
     if @note.save
-    	redirect_to @note, notice: '投稿されました。'
-  	else
-			render :new
+      redirect_to @note, notice: '投稿されました。'
+    else
+      render :new
     end
   end
 
   def edit
   end
 
-	def update
+  def update
     if @note.update(note_params)
-      redirect_to note_path(@note.id),  notice: '投稿されました。'
+      redirect_to note_path(@note.id), notice: '投稿されました。'
     else
-			render :edit
+      render :edit
     end
-	end
+  end
 
-	def destroy
-		@note.destroy
-		redirect_to notes_path
-	end
+  def destroy
+    @note.destroy
+    redirect_to notes_path
+  end
 
   private
-    def set_note
-        @note = Note.find(params[:id])
-    end
 
-    def note_params
-        params.require(:note).permit(:title, :content, :category_id, :image, :image_cache, :remove_image )
-    end
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
-    def correct_user
-      note = Note.find(params[:id])
-      if current_user.id != note.user_id
-        redirect_to notes_path
-      end
-    end
+  def note_params
+    params.require(:note).permit(:title, :content, :category_id, :image, :image_cache, :remove_image)
+  end
 
+  def correct_user
+    note = Note.find(params[:id])
+    redirect_to notes_path if current_user.id != note.user_id
+  end
 end
