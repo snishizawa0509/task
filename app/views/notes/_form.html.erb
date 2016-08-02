@@ -1,5 +1,7 @@
 <%= form_for @note, html: { class: "form-horizontal note", multipart: true } do |f| %>
-
+  <% if @categories.blank? %>
+    <p>カテゴリが存在しないため編集できません。カテゴリ作成して下さい。</p>
+  <% end %>
   <% if @note.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
