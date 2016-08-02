@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:edit, :update, :destroy]
   def index
-    @categories = Category.where(user: current_user)
+    @categories = Category.where(user: current_user).page(params[:page]).per(10)
     @category = Category.new
   end
 

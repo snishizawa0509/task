@@ -27,6 +27,7 @@
   </div>
 <% end %>
 <table class="table table-striped">
+  <%= page_entries_info @categories %>
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
@@ -45,5 +46,6 @@
         </td>
       </tr>
     <% end %>
+  <%= paginate @categories %>
   </tbody>
 </table>
