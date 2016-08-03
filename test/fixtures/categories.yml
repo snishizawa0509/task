@@ -9,3 +9,6 @@ category_3<%= i %>:
   name: <%= "犬#{i}" %>
   user: user3
 <% end %>
+category_1:
+  name: "delete-category-test"
+  user: user1

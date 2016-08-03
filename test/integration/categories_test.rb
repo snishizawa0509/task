@@ -29,7 +29,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     login_as(users(:user1))
     visit categories_path
     assert_difference 'Category.count', -1 do
-      first(:link, '削除').click
+      page.all(:link, '削除')[5].click
     end
   end
 end

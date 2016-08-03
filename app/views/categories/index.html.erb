@@ -3,20 +3,6 @@
   <h1><%= 'カテゴリ一覧' %></h1>
 </div>
 <%= form_for @category do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @category.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
   <%= f.label "カテゴリ追加", :class => 'control-label' %>
   <div class="input-group">
     <%= f.text_field :name, :class => 'form-control' %>
@@ -27,6 +13,7 @@
   </div>
 <% end %>
 <table class="table table-striped">
+  <%= page_entries_info @categories %>
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
@@ -45,5 +32,6 @@
         </td>
       </tr>
     <% end %>
+  <%= paginate @categories %>
   </tbody>
 </table>

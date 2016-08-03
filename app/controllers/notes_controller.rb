@@ -5,6 +5,7 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
+    @categories = Category.where(user: current_user)
   end
 
   def show
@@ -33,6 +34,7 @@ class NotesController < ApplicationController
   end
 
   def edit
+    @categories = Category.where(user: current_user)
   end
 
   def update
