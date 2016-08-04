@@ -2,10 +2,9 @@ class NotesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_categories, only: [:new, :create, :edit]
   def new
     @note = Note.new
-    @categories = Category.where(user: current_user)
   end
 
   def show
@@ -34,7 +33,6 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @categories = Category.where(user: current_user)
   end
 
   def update
@@ -54,6 +52,10 @@ class NotesController < ApplicationController
 
   def set_note
     @note = Note.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.where(user: current_user)
   end
 
   def note_params
