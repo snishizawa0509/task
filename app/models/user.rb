@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :validatable
   has_many :notes, dependent:  :destroy
   has_many :categories, dependent:  :destroy
+  validates :name, presence: true, length: { maximum: 15 }, uniqueness: true
 end
