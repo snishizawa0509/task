@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     if @category.destroy
-      flash[:notice] = '追加しました'
+      flash[:notice] = '削除しました'
     else
       flash[:error] = 'ノートが存在しているため削除できません。'
     end
