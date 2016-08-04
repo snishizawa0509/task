@@ -10,6 +10,7 @@ ja:
   devise:
     registrations:
       user:
+        destroyed: アカウントを削除しました。
         signed_up: アカウント生成しログインしました。
     sessions:
       user:
